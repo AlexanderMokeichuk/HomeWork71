@@ -1,0 +1,6 @@
+.modalContent {
+  overflow-x: auto;
+}
+.modalContent::-webkit-scrollbar {
+  display: none;
+}
