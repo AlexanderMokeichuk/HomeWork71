@@ -1,0 +1,6 @@
+.dishesCard {
+  cursor: pointer;
+}
+.dishesCard:hover {
+  border: 1px solid black;
+}
