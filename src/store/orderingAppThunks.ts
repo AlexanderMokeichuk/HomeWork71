@@ -80,15 +80,31 @@ export const fetchOrders = createAsyncThunk<Order[] | [], undefined>(
   "orderingApp/fetchOrders",
   async () => {
     const {data: orders} = await axiosApi.get<ApiOrders | null>("/orders.json");
-    if (orders) {
-      const newOrders: Order[] = Object.keys(orders).map((id) => {
+    const {data: response} = await axiosApi.get<ApiDishes  | null>("/dishes.json");
+
+    if (orders && response) {
+
+      const newOrders = Object.keys(orders).map((id) => {
         return {
           orders: orders[id],
           id,
         };
       });
 
-      return newOrders;
+      const array: Order[] = newOrders.map((item) => {
+        const arr = Object.keys(item.orders).map((id) => {
+          return {
+            ...response[id],
+            amount: item.orders[id]
+          };
+        });
+        return {
+          id: item.id,
+          orders: arr
+        };
+      });
+
+      return array;
     }
 
     return [];

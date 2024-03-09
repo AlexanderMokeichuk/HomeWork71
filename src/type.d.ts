@@ -23,10 +23,10 @@ export interface ApiOrders {
   }
 }
 
-export interface Orders  {
-  [id: string]: number
+export interface Orders  extends ApiDish{
+  amount: number,
 }
 export interface Order {
   id: string,
-  orders: Orders
+  orders: Orders[]
 }
