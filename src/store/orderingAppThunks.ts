@@ -110,3 +110,10 @@ export const fetchOrders = createAsyncThunk<Order[] | [], undefined>(
     return [];
   },
 );
+
+export const completeOneOrder = createAsyncThunk<void, string>(
+  "ordering/completeOrder",
+  async (id) => {
+    await axiosApi.delete(`/orders/${id}.json`);
+  },
+);

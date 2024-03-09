@@ -4,6 +4,7 @@ import {ApiOrder} from "../../type";
 import {useAppDispatch} from "../../app/hooks";
 import {deleteDish, updateCartDishes} from "../../store/orderingAppSlice";
 import {addOrder} from "../../store/orderingAppThunks";
+import {DELIVERY} from "../../constants";
 
 interface Props {
   show: boolean,
@@ -14,8 +15,7 @@ interface Props {
 const Modal: React.FC<Props> = ({show, cartDishes, modalCancel}) => {
   const dispatch = useAppDispatch();
 
-  let delivery = 0;
-  if (cartDishes.length) delivery = 150;
+  const delivery = (cartDishes.length) ? DELIVERY : 0 ;
 
 
   const total = cartDishes.reduce((sum, cartDish) => {
